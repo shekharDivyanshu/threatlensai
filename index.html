@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ThreatLens AI – Stanford Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:Inter,sans-serif;background:#f4f7fb;color:#1f2937}
+header{background:#fff;padding:18px 32px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #e5e7eb;position:sticky;top:0}
+header input{padding:10px 14px;width:280px;border:1px solid #d1d5db;border-radius:8px}
+.wrap{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
+aside{background:#fff;border-right:1px solid #e5e7eb;padding:20px}
+aside h2{color:#2563eb}
+aside button{display:block;width:100%;margin:8px 0;padding:12px;border:0;background:none;border-radius:8px;text-align:left;cursor:pointer}
+aside button:hover,aside button.active{background:#dbeafe;color:#2563eb}
+main{padding:24px}
+.page{display:none}.page.active{display:block}
+.hero,.card{background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:20px;margin-bottom:18px}
+.hero{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(90deg,#eef5ff,#fff)}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.metric{font-size:30px;font-weight:700}
+.grid{display:grid;grid-template-columns:2fr 1fr;gap:18px}
+table{width:100%;border-collapse:collapse}
+th,td{padding:12px;border-bottom:1px solid #eee}
+tbody tr:hover{background:#f3f4f6;cursor:pointer}
+.btn{background:#2563eb;color:#fff;border:0;padding:10px 16px;border-radius:8px;cursor:pointer}
+.timeline div{margin:10px 0;padding-left:12px;border-left:3px solid #2563eb}
+.chat{background:#f8fafc;border:1px solid #e5e7eb;padding:10px;border-radius:8px;margin:10px 0}
+.toast{position:fixed;right:20px;bottom:20px;background:#2563eb;color:#fff;padding:12px 18px;border-radius:8px;display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+<aside>
+<h2>ThreatLens AI</h2>
+<button class="active" onclick="show('dash',this)">Dashboard</button>
+<button onclick="show('investigation',this)">Investigation</button>
+<button onclick="show('history',this)">Historical Cases</button>
+<button onclick="show('collab',this)">Collaboration</button>
+<button onclick="show('feedback',this)">User Testing</button>
+</aside>
+<div>
+<header>
+<div><strong>Enterprise Security Investigation Workspace</strong><div style="font-size:13px;color:#6b7280">Stanford Design Thinking Interactive Prototype</div></div>
+<div><input placeholder="Search alerts, users, assets"> <button class="btn" onclick="toast('New investigation created')">+ New Investigation</button></div>
+</header>
+<main>
+
+<section id="dash" class="page active">
+<div class="hero">
+<div>
+<h2>Reduce investigation time by 63%</h2>
+<p>AI correlates alerts, business impact and historical cases into one investigation workspace.</p>
+<button class="btn" onclick="show('investigation')">Start Investigation</button>
+</div>
+<div style="font-size:72px">🛡️</div>
+</div>
+
+<div class="kpis">
+<div class="card"><div>Critical Alerts</div><div class="metric">12</div></div>
+<div class="card"><div>Business Risk</div><div class="metric">92%</div></div>
+<div class="card"><div>Open Cases</div><div class="metric">8</div></div>
+<div class="card"><div>MTTR</div><div class="metric">18m</div></div>
+</div>
+
+<div class="grid">
+<div class="card">
+<h3>Incident Queue</h3>
+<table>
+<tr><th>Incident</th><th>Severity</th><th>AI</th></tr>
+<tr onclick="show('investigation')"><td>Credential Theft</td><td>Critical</td><td>96%</td></tr>
+<tr onclick="show('investigation')"><td>SQL Injection</td><td>High</td><td>91%</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>AI Insight</h3>
+<p><b>Why this alert?</b></p>
+<ul>
+<li>Impossible travel login</li>
+<li>Endpoint malware</li>
+<li>Cloud API misuse</li>
+<li>Matches Incident #1452</li>
+</ul>
+<button class="btn" onclick="toast('Executive report generated')">Generate Report</button>
+</div>
+</div>
+</section>
+
+<section id="investigation" class="page">
+<div class="grid">
+<div class="card">
+<h2>Investigation Progress</h2>
+<div class="timeline">
+<div>✓ Detection</div>
+<div>✓ AI Analysis</div>
+<div>✓ Threat Validation</div>
+<div>○ Containment</div>
+<div>○ Recovery</div>
+</div>
+</div>
+<div class="card">
+<h2>Business Impact</h2>
+<p>Revenue at Risk: <b>$1.2M</b></p>
+<p>Critical Assets: Payment API, Customer Portal</p>
+<p>Estimated Users: 18,250</p>
+<button class="btn" onclick="toast('Containment started')">Start Containment</button>
+</div>
+</div>
+</section>
+
+<section id="history" class="page">
+<div class="card">
+<h2>Historical Similar Incidents</h2>
+<ul>
+<li>March 2026 – Credential Theft – Resolved in 21 min</li>
+<li>July 2026 – VPN Compromise – Resolved in 17 min</li>
+</ul>
+</div>
+</section>
+
+<section id="collab" class="page">
+<div class="card">
+<h2>Analyst Collaboration</h2>
+<div class="chat"><b>Melissa:</b> Likely phishing entry point.</div>
+<div class="chat"><b>Austin:</b> Endpoint isolated.</div>
+<input style="width:100%;padding:10px" placeholder="Add investigation note">
+</div>
+</section>
+
+<section id="feedback" class="page">
+<div class="card">
+<h2>User Testing Feedback</h2>
+<p>Ease of Investigation ⭐⭐⭐⭐⭐</p>
+<p>AI Recommendations ⭐⭐⭐⭐☆</p>
+<label>Comments</label><br>
+<textarea style="width:100%;height:120px;padding:10px"></textarea><br><br>
+<button class="btn" onclick="toast('Feedback submitted')">Submit Feedback</button>
+</div>
+</section>
+
+</main>
+</div>
+</div>
+<div id="toast" class="toast"></div>
+<script>
+function show(id,b){
+document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+if(b){document.querySelectorAll('aside button').forEach(x=>x.classList.remove('active'));b.classList.add('active');}
+}
+function toast(msg){
+let t=document.getElementById('toast');
+t.textContent=msg;t.style.display='block';
+setTimeout(()=>t.style.display='none',2000);
+}
+</script>
+</body>
+</html>
